@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คุณเป็นนักเดินทางสายไหนในสนามนี้? | Triple S</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Triple S Official CI - Deep Navy & Premium Gold */
+    --navy-deep:    #050a14;
+    --navy-base:    #0a1122;
+    --navy-card:    #101a30;
+    --navy-border:  #1b2a4a;
+    --gold:         #c9a84c;
+    --gold-light:   #f1df99;
+    --gold-dim:     #967a33;
+    --gold-glow:    rgba(201, 168, 76, 0.08);
+    --text:         #eef1f8;
+    --text-muted:   #8294b5;
+    --white:        #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy-deep);
+    color: var(--text);
+    font-family: 'Kanit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 85% 85%, rgba(16, 26, 48, 0.8) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 480px;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .header-badge {
+    display: inline-block;
+    border: 1px solid var(--gold-dim);
+    padding: 4px 12px;
+    margin-bottom: 16px;
+    background: rgba(5, 10, 20, 0.6);
+  }
+
+  .header-badge span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .header h1 span {
+    color: var(--gold-light);
+  }
+
+  .header p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 3px;
+    background: var(--navy-border);
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+    transition: width 0.4s ease;
+  }
+
+  .progress-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 700;
+    min-width: 35px;
+    text-align: right;
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-top: 3px solid var(--gold);
+    padding: 24px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .q-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .q-text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--white);
+  }
+
+  /* ── OPTIONS ── */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    padding: 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .option-btn:hover {
+    border-color: var(--gold-dim);
+    background: var(--gold-glow);
+    transform: translateX(4px);
+  }
+
+  .option-btn.selected {
+    border-color: var(--gold);
+    background: rgba(201, 168, 76, 0.12);
+  }
+
+  .opt-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .option-btn.selected .opt-key {
+    background: var(--gold);
+    color: var(--navy-deep);
+  }
+
+  .opt-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* ── NEXT BUTTON ── */
+  .next-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: var(--navy-deep);
+    border: none;
+    padding: 16px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-top: 16px;
+    display: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(201,168,76,0.2);
+  }
+
+  .next-btn.visible { display: block; }
+
+  /* ── RESULT ── */
+  .result-card { display: none; }
+  .result-card.visible { display: block; animation: slideUp 0.5s ease both; }
+
+  .result-crown {
+    text-align: center;
+    padding: 30px 20px;
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    border-top: 3px solid var(--gold);
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+
+  .result-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .result-emoji {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .result-type-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--gold-light);
+  }
+
+  .result-tagline {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .result-desc-card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+
+  .result-desc-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 300;
+    color: #cad5eb;
+  }
+
+  .traits-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .trait {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: rgba(27, 42, 74, 0.4);
+    border: 1px solid var(--navy-border);
+    color: var(--gold-light);
+    border-radius: 2px;
+  }
+
+  .weakness-card {
+    background: var(--navy-base);
+    border: 1px solid var(--navy-border);
+    border-left: 3px solid var(--gold-dim);
+    padding: 18px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
+
+  .weakness-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .weakness-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .weakness-text strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  /* CTA */
+  .cta-card {
+    background: var(--navy-card);
+    border: 1px solid var(--gold-dim);
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    text-align: center;
+    border-radius: 4px;
+  }
+
+  .cta-headline {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-primary, .btn-secondary {
+    display: block;
+    padding: 14px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: var(--navy-deep);
+    font-weight: 700;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold-light);
+    font-weight: 400;
+    border: 1px solid var(--gold-dim);
+  }
+
+  .btn-secondary:hover {
+    background: var(--gold-glow);
+    border-color: var(--gold-light);
+  }
+
+  .bottom-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-share, .btn-retry {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--navy-border);
+    color: var(--text-muted);
+    padding: 12px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 4px;
+  }
+
+  .btn-share:hover { border-color: var(--gold-dim); color: var(--gold); }
+  .btn-retry:hover { border-color: var(--text-muted); color: var(--text); }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-badge"><span>Triple S Discovery</span></div>
+    <h1>ค้นหาตัวตนของคุณ<br><span>ในสนามนี้?</span></h1>
+    <p>5 คำถามคัดกรองพฤติกรรม เพื่อการเดินเกมที่ยั่งยืนและปลอดภัย</p>
+  </div>
+
+  <div id="quiz-section">
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <span class="progress-num" id="progress-num">0 / 5</span>
+    </div>
+    <div id="question-area"></div>
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">ถัดไป &nbsp;→</button>
+  </div>
+
+  <div id="result-section" class="result-card"></div>
+
+</div>
+
+<script>
+// ปรับเปลี่ยนคำศัพท์ให้เป็น Safe-words ทั้งหมด (หลบกฎ Forex / เทรด)
+const questions = [
+  {
+    id: 1,
+    text: "หากเปิดเกมเดินหน้าไปแล้ว ติดลบ 2% แต่ทิศทางภาพรวมยังไม่ชัดเจน... ปกติคุณเลือกทำอย่างไร?",
+    options: [
+      { key: "A", text: "ตัดจบตัดไฟแต่ต้นลมทันที ไม่ชอบถือข้ามวัน เจ็บน้อยย่อมปลอดภัยกว่า", type: "scalper" },
+      { key: "B", text: "รอดูเชิงสัก 1-2 วัน รอทดสอบแนวรับหลักแล้วค่อยตัดสินใจอีกที", type: "swing" },
+      { key: "C", text: "ทำตามระบบ ถือต่อยาวๆ ไม่หวั่นไหวกับความผันผวนระยะสั้น", type: "position" },
+    ]
+  },
+  {
+    id: 2,
+    text: "ในวันที่สนามแห่งนี้ไม่มีสัญญาณหรือจังหวะให้เล่นเลย คุณจัดการตัวเองอย่างไร?",
+    options: [
+      { key: "A", text: "อึดอัดมาก อยากขยับมือทำอะไรสักอย่าง การอยู่เฉยๆ มันทำใจยาก", type: "scalper" },
+      { key: "B", text: "เฝ้ารอได้ แต่ขอเปิดจอบ่อยๆ เผื่อมีโอกาสหลุดมาให้คว้า", type: "swing" },
+      { key: "C", text: "ปิดจอ ไปพักผ่อนทำอย่างอื่น ตลาดนิ่งก็แค่พัก ไม่ใช่ปัญหา", type: "position" },
+    ]
+  },
+  {
+    id: 3,
+    text: "เป้าหมายและปลายทางในการเข้ามาร่วมสนุกในสนามนี้ ข้อไหนตรงกับใจคุณที่สุด?",
+    options: [
+      { key: "A", text: "เก็บผลตอบแทนเข้ากระเป๋าทุกวัน เม็ดเงินเล็กๆ แต่เห็นผลไวและสม่ำเสมอ", type: "scalper" },
+      { key: "B", text: "ดักกินรอบใหญ่เป็นสัปดาห์ ไม่จำเป็นต้องขยับตัวทุกวัน ขอเน้นๆ พอ", type: "swing" },
+      { key: "C", text: "เลือกพื้นที่ได้เปรียบในราคาที่ดี แล้วถือยาวปล่อยให้ระบบเติบโตตามแผน", type: "position" },
+    ]
+  },
+  {
+    id: 4,
+    text: "ปัญหาหรืออุปสรรคชิ้นโตที่คุณมักจะพบเจออยู่บ่อยครั้งคืออะไร?",
+    options: [
+      { key: "A", text: "เข้าช้า-ออกช้ากว่าจังหวะจริงไปก้าวหนึ่งเสมอ ลังเลจนพลาดตลอด", type: "scalper" },
+      { key: "B", text: "จังหวะบวกทำได้ดี แต่สุดท้ายชอบคืนคืนให้สนามหมด เพราะล็อคความเสี่ยงไม่เป็น", type: "swing" },
+      { key: "C", text: "มองแผนออก แต่พอถึงจุดสำคัญกลับไม่กล้าเพิ่มขนาดการลงทุนเพราะกลัวพลาด", type: "position" },
+    ]
+  },
+  {
+    id: 5,
+    text: "หากผลลัพธ์ในสนามนี้ยังไม่เป็นไปตามเป้า คุณคิดว่าสาเหตุหลักมาจากจุดไหน?",
+    options: [
+      { key: "A", text: "การอ่านทิศทางระยะสั้นแบบ Real-time ยังไม่เฉียบขาดพอ", type: "scalper" },
+      { key: "B", text: "ยังขาดโครงสร้างและวินัยที่ชัดเจน มักเผลอใช้ความรู้สึกส่วนตัวตัดสินใจ", type: "swing" },
+      { key: "C", text: "ความรู้พื้นฐานและกลยุทธ์ภาพรวมยังไม่แน่นพอ ทำให้ไม่มั่นใจในแผนตัวเอง", type: "position" },
+    ]
+  }
+];
+
+const results = {
+  scalper: {
+    emoji: "⚡",
+    name: "Scalper",
+    tagline: "ไว · เฉียบขาด · อยู่กับปัจจุบัน",
+    typeClass: "scalper",
+    desc: "คุณคือนักล่าที่มีความตื่นตัวสูงมาก ชอบความชัดเจนและเห็นผลลัพธ์ที่รวดเร็ว ตัดสินใจได้ในเสี้ยววินาที จุดเด่นของคุณคือความเด็ดขาดในการคุมความเสี่ยงระยะสั้น",
+    traits: ["#Real-time", "#ตัดสินใจไว", "#ไม่ถือข้ามวัน", "#คุมความเสี่ยงไว"],
+    weakness_title: "คำแนะนำจากพี่บีแบร์",
+    weakness: "สายนี้มักจะตกม้าตายตรง <strong>จังหวะจุดเข้าที่เร่งรีบเกินไป</strong> และเสี่ยงต่อการเสพติดการลุยจนเกินพอดี การมีโครงสร้างพื้นฐานที่ชัดเจนจะช่วยกรองสิ่งรบกวนรอบตัว และทำให้อยู่รอดได้ยาวๆ ครับ",
+    cta_headline: "อยากเข้าทำจังหวะได้คมและปลอดภัยขึ้นไหม?",
+    cta_sub: "พี่เตรียมพื้นที่เรียนรู้ฟรี ปูพื้นฐานการอ่านโครงสร้างสนามและจังหวะเข้าทำไว้ให้แล้วครับ",
+    primary_label: "🎓 แวะมาศึกษาด้วยกันฟรี",
+    secondary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
+    primary_first: true
+  },
+  swing: {
+    emoji: "🌊",
+    name: "Swing Trader",
+    tagline: "ดักรอบใหญ่ · ใจเย็น · ไม่รีบร้อน",
+    typeClass: "swing",
+    desc: "คุณเป็นคนมองเกมกว้าง รู้จักจังหวะที่ควรลุยและควรรอ ไม่ปล่อยให้ความผันผวนระยะสั้นมาปั่นหัว จุดเด่นคือความอดทนและการอ่านโครงสร้างใหญ่ได้อย่างเป็นระบบ",
+    traits: ["#จับจังหวะรอบใหญ่", "#อ่านโครงสร้างแม่น", "#รอสัญญาณจริง", "#สมดุลชีวิตดี"],
+    weakness_title: "คำแนะนำจากพี่บีแบร์",
+    weakness: "ปัญหาของสายรอบใหญ่คือ <strong>ได้ผลตอบแทนมาแล้วปล่อยให้ไหลกลับไปที่เดิม</strong> เพราะขาดระบบการล็อคสิทธิ์ที่เป็นรูปธรรม หรือบางครั้งลังเลจนปล่อยโอกาสหลุดมือไปอย่างน่าเสียดาย",
+    cta_headline: "อยากสร้างระบบล็อคความยั่งยืนไหม?",
+    cta_sub: "มารับวิธีบริหารหน้าตักและอ่านโครงสร้างเชิงลึกในระบบบริการฟรีที่พี่ตั้งใจทำไว้ให้ได้เลย",
+    primary_label: "🎓 แวะมาศึกษาด้วยกันฟรี",
+    secondary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
+    primary_first: true
+  },
+  position: {
+    emoji: "🏔️",
+    name: "Position Trader",
+    tagline: "มองภาพกว้าง · วินัยเหล็ก · เดินเกมระยะยาว",
+    typeClass: "position",
+    desc: "คุณมีความคิดเหมือนผู้จัดการกองทุน โฟกัสภาพรวมระดับมหภาคมากกว่าตัวเลขรายวัน มีวินัยสูงมาก และมักจะมองเห็นโอกาสครั้งใหญ่ในจุดที่คนอื่นตื่นตระหนกกันไปหมด",
+    traits: ["#มองภาพใหญ่", "#เดินเกมระยะยาว", "#วินัยเหล็ก", "#เข้าใจกลไกโลก"],
+    weakness_title: "คำแนะนำจากพี่บีแบร์",
+    weakness: "จุดเปราะบางคือ <strong>ถ้าพื้นฐานแนวคิดไม่แน่นพอ คุณจะลังเลตลอดทาง</strong> ทำให้พลาดการเก็บของดีราคาถูก หรือแก้เกมผิดจุดเมื่อสนามเปลี่ยนทิศทางในระยะยาว",
+    cta_headline: "อยากเติมฐานรากแนวคิดให้แน่นหนากว่าเดิมไหม?",
+    cta_sub: "พี่รวบรวมแผนที่เดินเกมและโครงสร้างจิตวิทยาเชิงลึกไว้ในคอร์สพื้นที่ปลอดภัย ราคาชานมเรียบร้อยครับ",
+    primary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
+    secondary_label: "🎓 แวะมาศึกษาด้วยกันฟรีก่อน",
+    primary_first: false
+  }
+};
+
+const URL_MINI_COURSE = "https://example.com/mini-course"; // ใส่ลิงก์ LINE OA / Mini Course ตรงนี้
+const URL_COURSE_1290 = "https://example.com/course-1290"; // ใส่ลิงก์หน้าขายคอร์สตรงนี้
+
+let current = 0;
+let answers = [];
+
+function renderQuestion() {
+  const q = questions[current];
+  const pct = (current / questions.length) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-num').textContent = `${current} / ${questions.length}`;
+
+  document.getElementById('question-area').innerHTML = `
+    <div class="question-card">
+      <div class="q-number">STAGE ${String(q.id).padStart(2,'0')}</div>
+      <div class="q-text">${q.text}</div>
+    </div>
+    <div class="options">
+      ${q.options.map((o,i) => `
+        <button class="option-btn" onclick="selectOption(this,'${o.type}')" style="animation: slideUp 0.3s ${i*0.05}s ease both">
+          <span class="opt-key">${o.key}</span>
+          <span class="opt-text">${o.text}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('next-btn').classList.remove('visible');
+}
+
+function selectOption(el, type) {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[current] = type;
+  document.getElementById('next-btn').classList.add('visible');
+}
+
+function nextQuestion() {
+  if (!answers[current]) return;
+  current++;
+  if (current < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  const count = { scalper: 0, swing: 0, position: 0 };
+  answers.forEach(a => count[a]++);
+  const winner = Object.entries(count).sort((a,b) => b[1]-a[1])[0][0];
+  const r = results[winner];
+
+  const primaryHref  = r.primary_first ? URL_MINI_COURSE : URL_COURSE_1290;
+  const secondaryHref = r.primary_first ? URL_COURSE_1290 : URL_MINI_COURSE;
+
+  document.getElementById('quiz-section').classList.add('hidden');
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-num').textContent = '5 / 5';
+
+  const sec = document.getElementById('result-section');
+  sec.classList.add('visible');
+  sec.innerHTML = `
+    <div class="result-crown">
+      <div class="result-label">สไตล์การเล่นของคุณคือ</div>
+      <span class="result-emoji">${r.emoji}</span>
+      <div class="result-type-name">${r.name}</div>
+      <div class="result-tagline">"${r.tagline}"</div>
+    </div>
+
+    <div class="result-desc-card">
+      <p>${r.desc}</p>
+      <div class="traits-row">
+        ${r.traits.map(t=>`<span class="trait">${t}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="weakness-card">
+      <div class="weakness-label">${r.weakness_title}</div>
+      <div class="weakness-text">${r.weakness}</div>
+    </div>
+
+    <div class="cta-card">
+      <div class="cta-headline">${r.cta_headline}</div>
+      <div class="cta-sub">${r.cta_sub}</div>
+      <div class="cta-buttons">
+        <a class="btn-primary" href="${primaryHref}" target="_blank">${r.primary_label}</a>
+        <a class="btn-secondary" href="${secondaryHref}" target="_blank">${r.secondary_label}</a>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <button class="btn-share" onclick="copyResult('${winner}')">📋 คัดลอกผลลัพธ์</button>
+      <button class="btn-retry" onclick="resetQuiz()">↩ ทำใหม่อีกครั้ง</button>
+    </div>
+  `;
+}
+
+function copyResult(type) {
+  const r = results[type];
+  const text = `🎯 ผลลัพธ์ของฉันคือสาย: ${r.emoji} ${r.name}\nนิสัย: "${r.tagline}"\nมาร่วมเป็นส่วนหนึ่งในคอมมูนิตี้ที่ปลอดภัย Triple S ด้วยกันได้เลยครับ!`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.btn-share');
+    btn.textContent = '✦ คัดลอกเรียบร้อย!';
+    setTimeout(() => btn.textContent = '📋 คัดลอกผลลัพธ์', 2000);
+  });
+}
+
+function resetQuiz() {
+  current = 0; answers = [];
+  document.getElementById('result-section').classList.remove('visible');
+  document.getElementById('result-section').innerHTML = '';
+  document.getElementById('quiz-section').classList.remove('hidden');
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
