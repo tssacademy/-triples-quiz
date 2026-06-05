@@ -3,27 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>คุณเป็นนักเดินทางสายไหนในสนามนี้? | Triple S</title>
+<title>สไตล์การเทรดแบบไหนเหมาะกับนิสัยคุณ? | Triple S</title>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Triple S Official CI - Deep Navy & Premium Gold */
-    --navy-deep:    #050a14;
-    --navy-base:    #0a1122;
-    --navy-card:    #101a30;
-    --navy-border:  #1b2a4a;
-    --gold:         #c9a84c;
-    --gold-light:   #f1df99;
-    --gold-dim:     #967a33;
-    --gold-glow:    rgba(201, 168, 76, 0.08);
-    --text:         #eef1f8;
-    --text-muted:   #8294b5;
-    --white:        #ffffff;
+    --navy-deep:   #050a14;
+    --navy-base:   #0a1122;
+    --navy-card:   #101a30;
+    --navy-border: #1b2a4a;
+    --gold:        #c9a84c;
+    --gold-light:  #f1df99;
+    --gold-dim:    #967a33;
+    --gold-glow:   rgba(201,168,76,0.08);
+    --text:        #eef1f8;
+    --text-muted:  #8294b5;
+    --white:       #ffffff;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--navy-deep);
     color: var(--text);
@@ -35,546 +32,289 @@
     overflow-x: hidden;
     position: relative;
   }
-
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(circle at 15% 15%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 85% 85%, rgba(16, 26, 48, 0.8) 0%, transparent 60%);
+      radial-gradient(circle at 15% 15%, rgba(201,168,76,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 85% 85%, rgba(16,26,48,0.8) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
   }
-
-  .wrapper {
-    width: 100%;
-    max-width: 480px;
-    padding: 30px 20px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ── HEADER ── */
-  .header {
-    text-align: center;
-    margin-bottom: 30px;
-    animation: fadeDown 0.6s ease both;
-  }
-
-  .header-badge {
-    display: inline-block;
-    border: 1px solid var(--gold-dim);
-    padding: 4px 12px;
-    margin-bottom: 16px;
-    background: rgba(5, 10, 20, 0.6);
-  }
-
-  .header-badge span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-  }
-
-  .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-
-  .header h1 span {
-    color: var(--gold-light);
-  }
-
-  .header p {
-    font-size: 14px;
-    color: var(--text-muted);
-    font-weight: 300;
-    line-height: 1.5;
-  }
-
-  /* ── PROGRESS ── */
-  .progress-wrap {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .progress-bar {
-    flex: 1;
-    height: 3px;
-    background: var(--navy-border);
-    position: relative;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
-    transition: width 0.4s ease;
-  }
-
-  .progress-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--gold);
-    font-weight: 700;
-    min-width: 35px;
-    text-align: right;
-  }
-
-  /* ── QUESTION CARD ── */
-  .question-card {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    border-top: 3px solid var(--gold);
-    padding: 24px;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-
-  .q-number {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .q-text {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--white);
-  }
-
-  /* ── OPTIONS ── */
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .option-btn {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    padding: 16px;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-radius: 4px;
-    width: 100%;
-  }
-
-  .option-btn:hover {
-    border-color: var(--gold-dim);
-    background: var(--gold-glow);
-    transform: translateX(4px);
-  }
-
-  .option-btn.selected {
-    border-color: var(--gold);
-    background: rgba(201, 168, 76, 0.12);
-  }
-
-  .opt-key {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--gold);
-    border: 1px solid var(--gold-dim);
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.2s;
-  }
-
-  .option-btn.selected .opt-key {
-    background: var(--gold);
-    color: var(--navy-deep);
-  }
-
-  .opt-text {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.5;
-    color: var(--text);
-  }
-
-  /* ── NEXT BUTTON ── */
-  .next-btn {
-    width: 100%;
-    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
-    color: var(--navy-deep);
-    border: none;
-    padding: 16px;
-    font-family: 'Kanit', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    margin-top: 16px;
-    display: none;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-
-  .next-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(201,168,76,0.2);
-  }
-
+  .wrapper { width: 100%; max-width: 480px; padding: 30px 20px 60px; position: relative; z-index: 1; }
+  .header { text-align: center; margin-bottom: 30px; animation: fadeDown 0.6s ease both; }
+  .header-badge { display: inline-block; border: 1px solid var(--gold-dim); padding: 4px 12px; margin-bottom: 16px; background: rgba(5,10,20,0.6); }
+  .header-badge span { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+  .header h1 { font-size: 28px; font-weight: 700; line-height: 1.3; color: var(--white); margin-bottom: 8px; }
+  .header h1 span { color: var(--gold-light); }
+  .header p { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.5; }
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .progress-bar { flex: 1; height: 3px; background: var(--navy-border); }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold-light)); transition: width 0.4s ease; }
+  .progress-num { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--gold); font-weight: 700; min-width: 35px; text-align: right; }
+  .question-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-top: 3px solid var(--gold); padding: 24px; margin-bottom: 16px; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+  .q-number { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gold); letter-spacing: 1px; font-weight: 700; margin-bottom: 10px; }
+  .q-text { font-size: 18px; font-weight: 500; line-height: 1.5; color: var(--white); }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn { background: var(--navy-card); border: 1px solid var(--navy-border); padding: 16px; text-align: left; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 12px; border-radius: 4px; width: 100%; }
+  .option-btn:hover { border-color: var(--gold-dim); background: var(--gold-glow); transform: translateX(4px); }
+  .option-btn.selected { border-color: var(--gold); background: rgba(201,168,76,0.12); }
+  .opt-key { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 700; color: var(--gold); border: 1px solid var(--gold-dim); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+  .option-btn.selected .opt-key { background: var(--gold); color: var(--navy-deep); }
+  .opt-text { font-size: 14px; font-weight: 300; line-height: 1.5; color: var(--text); }
+  .next-btn { width: 100%; background: linear-gradient(135deg, var(--gold-dim), var(--gold)); color: var(--navy-deep); border: none; padding: 16px; font-family: 'Kanit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 1px; margin-top: 16px; display: none; border-radius: 4px; transition: all 0.2s; }
+  .next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201,168,76,0.2); }
   .next-btn.visible { display: block; }
-
-  /* ── RESULT ── */
   .result-card { display: none; }
   .result-card.visible { display: block; animation: slideUp 0.5s ease both; }
+  .result-crown { text-align: center; padding: 30px 20px; background: var(--navy-card); border: 1px solid var(--navy-border); border-top: 3px solid var(--gold); margin-bottom: 12px; border-radius: 4px; }
+  .result-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; }
+  .result-emoji { font-size: 48px; display: block; margin-bottom: 10px; }
+  .result-type-name { font-size: 28px; font-weight: 700; margin-bottom: 6px; color: var(--gold-light); }
+  .result-tagline { font-size: 14px; color: var(--text); font-weight: 400; }
 
-  .result-crown {
-    text-align: center;
-    padding: 30px 20px;
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    border-top: 3px solid var(--gold);
-    margin-bottom: 12px;
-    border-radius: 4px;
+  /* SCORE BREAKDOWN — Fix #4 */
+  .score-card { background: var(--navy-base); border: 1px solid var(--navy-border); padding: 18px 20px; margin-bottom: 12px; border-radius: 4px; }
+  .score-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 14px; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .score-row:last-child { margin-bottom: 0; }
+  .score-label { font-size: 12px; color: var(--text-muted); min-width: 110px; }
+  .score-bar-wrap { flex: 1; height: 6px; background: var(--navy-border); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold)); border-radius: 3px; transition: width 0.8s ease; }
+  .score-bar-fill.winner { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .score-val { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gold); min-width: 24px; text-align: right; }
+
+  .result-desc-card { background: var(--navy-card); border: 1px solid var(--navy-border); padding: 20px; margin-bottom: 12px; border-radius: 4px; }
+  .result-desc-card p { font-size: 14px; line-height: 1.6; font-weight: 300; color: #cad5eb; }
+  .traits-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .trait { font-size: 12px; padding: 4px 10px; background: rgba(27,42,74,0.4); border: 1px solid var(--navy-border); color: var(--gold-light); border-radius: 2px; }
+  .weakness-card { background: var(--navy-base); border: 1px solid var(--navy-border); border-left: 3px solid var(--gold-dim); padding: 18px; margin-bottom: 12px; border-radius: 4px; }
+  .weakness-label { font-size: 12px; font-weight: 600; color: var(--gold-light); margin-bottom: 6px; }
+  .weakness-text { font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--text); }
+  .weakness-text strong { color: var(--gold-light); font-weight: 500; }
+  .cta-card { background: var(--navy-card); border: 1px solid var(--gold-dim); padding: 24px 20px; margin-bottom: 16px; text-align: center; border-radius: 4px; }
+  .cta-headline { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.4; }
+  .cta-sub { font-size: 13px; color: var(--text-muted); font-weight: 300; line-height: 1.5; margin-bottom: 18px; }
+  .cta-buttons { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Button styles */
+  .btn-gold, .btn-outline, .btn-line, .btn-discord {
+    display: block; padding: 14px; font-family: 'Kanit', sans-serif; font-size: 15px;
+    cursor: pointer; text-decoration: none; text-align: center; border-radius: 4px;
+    transition: all 0.2s; font-weight: 600;
   }
+  .btn-gold { background: linear-gradient(135deg, var(--gold-dim), var(--gold)); color: var(--navy-deep); border: none; }
+  .btn-gold:hover { background: linear-gradient(135deg, var(--gold), var(--gold-light)); transform: translateY(-1px); }
 
-  .result-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+  /* Fix #2 — LINE เป็น CTA รอง ขนาดเล็กลง */
+  .btn-line-secondary {
+    display: block; padding: 11px 14px; font-family: 'Kanit', sans-serif; font-size: 13px;
+    cursor: pointer; text-decoration: none; text-align: center; border-radius: 4px;
+    transition: all 0.2s; font-weight: 400;
+    background: transparent; color: #06C755; border: 1px solid rgba(6,199,85,0.35);
   }
+  .btn-line-secondary:hover { background: rgba(6,199,85,0.08); border-color: #06C755; }
 
-  .result-emoji {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 10px;
-  }
+  .btn-outline { background: transparent; color: var(--gold-light); border: 1px solid var(--gold-dim); font-weight: 400; }
+  .btn-outline:hover { background: var(--gold-glow); border-color: var(--gold-light); }
+  .btn-discord { background: #5865F2; color: var(--white); border: none; }
+  .btn-discord:hover { background: #4752d9; transform: translateY(-1px); }
 
-  .result-type-name {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    color: var(--gold-light);
-  }
-
-  .result-tagline {
-    font-size: 14px;
-    color: var(--text);
-    font-weight: 400;
-  }
-
-  .result-desc-card {
-    background: var(--navy-card);
-    border: 1px solid var(--navy-border);
-    padding: 20px;
-    margin-bottom: 12px;
-    border-radius: 4px;
-  }
-
-  .result-desc-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    font-weight: 300;
-    color: #cad5eb;
-  }
-
-  .traits-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 14px;
-  }
-
-  .trait {
-    font-size: 12px;
-    padding: 4px 10px;
-    background: rgba(27, 42, 74, 0.4);
-    border: 1px solid var(--navy-border);
-    color: var(--gold-light);
-    border-radius: 2px;
-  }
-
-  .weakness-card {
-    background: var(--navy-base);
-    border: 1px solid var(--navy-border);
-    border-left: 3px solid var(--gold-dim);
-    padding: 18px;
-    margin-bottom: 12px;
-    border-radius: 4px;
-  }
-
-  .weakness-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gold-light);
-    margin-bottom: 6px;
-  }
-
-  .weakness-text {
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 1.6;
-    color: var(--text);
-  }
-
-  .weakness-text strong {
-    color: var(--gold-light);
-    font-weight: 500;
-  }
-
-  /* CTA */
-  .cta-card {
-    background: var(--navy-card);
-    border: 1px solid var(--gold-dim);
-    padding: 24px 20px;
-    margin-bottom: 16px;
-    text-align: center;
-    border-radius: 4px;
-  }
-
-  .cta-headline {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-
-  .cta-sub {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 300;
-    line-height: 1.5;
-    margin-bottom: 18px;
-  }
-
-  .cta-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .btn-primary, .btn-secondary {
-    display: block;
-    padding: 14px;
-    font-family: 'Kanit', sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
-    color: var(--navy-deep);
-    font-weight: 700;
-    border: none;
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
-    transform: translateY(-1px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--gold-light);
-    font-weight: 400;
-    border: 1px solid var(--gold-dim);
-  }
-
-  .btn-secondary:hover {
-    background: var(--gold-glow);
-    border-color: var(--gold-light);
-  }
-
-  .bottom-row {
-    display: flex;
-    gap: 10px;
-  }
-
-  .btn-share, .btn-retry {
-    flex: 1;
-    background: transparent;
-    border: 1px solid var(--navy-border);
-    color: var(--text-muted);
-    padding: 12px;
-    font-family: 'Kanit', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border-radius: 4px;
-  }
-
+  .bottom-row { display: flex; gap: 10px; }
+  .btn-share, .btn-retry { flex: 1; background: transparent; border: 1px solid var(--navy-border); color: var(--text-muted); padding: 12px; font-family: 'Kanit', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.2s; border-radius: 4px; }
   .btn-share:hover { border-color: var(--gold-dim); color: var(--gold); }
   .btn-retry:hover { border-color: var(--text-muted); color: var(--text); }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
 
+  /* SOCIAL FOLLOW */
+  .social-follow { margin-top: 20px; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 4px; padding: 18px 16px; text-align: center; }
+  .social-follow-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 14px; }
+  .social-links { display: flex; flex-direction: column; gap: 8px; }
+  .social-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 1px solid var(--navy-border); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; background: var(--navy-base); }
+  .social-link:hover { border-color: var(--gold-dim); background: var(--gold-glow); transform: translateX(3px); }
+  .social-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .social-icon.fb { background: #1877F2; }
+  .social-icon.yt { background: #FF0000; }
+  .social-icon.tt { background: #000; border: 1px solid #444; }
+  .social-info { text-align: left; }
+  .social-platform { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+  .social-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   .hidden { display: none !important; }
 </style>
 </head>
 <body>
-
 <div class="wrapper">
-
   <div class="header">
     <div class="header-badge"><span>Triple S Discovery</span></div>
-    <h1>ค้นหาตัวตนของคุณ<br><span>ในสนามนี้?</span></h1>
-    <p>5 คำถามคัดกรองพฤติกรรม เพื่อการเดินเกมที่ยั่งยืนและปลอดภัย</p>
+    <h1>สไตล์การเทรดแบบไหน<br><span>เหมาะกับนิสัยของคุณ?</span></h1>
+    <p>5 คำถามค้นหาตัวตน เพื่อเส้นทางการเทรดที่ใช่สำหรับคุณโดยเฉพาะ</p>
   </div>
-
   <div id="quiz-section">
     <div class="progress-wrap">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       <span class="progress-num" id="progress-num">0 / 5</span>
     </div>
     <div id="question-area"></div>
     <button class="next-btn" id="next-btn" onclick="nextQuestion()">ถัดไป &nbsp;→</button>
   </div>
-
   <div id="result-section" class="result-card"></div>
-
 </div>
 
 <script>
-// ปรับเปลี่ยนคำศัพท์ให้เป็น Safe-words ทั้งหมด (หลบกฎ Forex / เทรด)
+const LINKS = {
+  checklist: 'https://drive.google.com/drive/folders/11hlJfWkqPhV7IrjJqLgS8Tqt3D_iKjID?hl=th',
+  excel:     'https://drive.google.com/drive/folders/1LwDpfaLAVM0yhRmvQqmwpmRw-qg7ecPj?hl=th',
+  salepage:  'https://tssacademy.github.io/triples-foundation/',
+  discord:   'https://discord.com/invite/w9ATcva8mm',
+  line:      'https://line.me/R/ti/p/@864chlqd',
+};
+
+const TYPE_LABELS = {
+  scalper:  '⚡ Scalper',
+  swing:    '🌊 Swing',
+  position: '🏔️ Position',
+  ea:       '🤖 EA Farmer',
+  guided:   '🐻 Guided',
+};
+
+// Fix #1 — เปลี่ยน -2% เป็นภาษาที่มือใหม่เข้าถึงได้
 const questions = [
   {
     id: 1,
-    text: "หากเปิดเกมเดินหน้าไปแล้ว ติดลบ 2% แต่ทิศทางภาพรวมยังไม่ชัดเจน... ปกติคุณเลือกทำอย่างไร?",
+    text: 'หากเปิดออเดอร์ไปแล้ว แต่กราฟเริ่มติดลบจนเริ่มกังวล และทิศทางภาพรวมยังก้ำกึ่ง คุณจะทำอย่างไร?',
     options: [
-      { key: "A", text: "ตัดจบตัดไฟแต่ต้นลมทันที ไม่ชอบถือข้ามวัน เจ็บน้อยย่อมปลอดภัยกว่า", type: "scalper" },
-      { key: "B", text: "รอดูเชิงสัก 1-2 วัน รอทดสอบแนวรับหลักแล้วค่อยตัดสินใจอีกที", type: "swing" },
-      { key: "C", text: "ทำตามระบบ ถือต่อยาวๆ ไม่หวั่นไหวกับความผันผวนระยะสั้น", type: "position" },
+      { key:'A', text:'คัดทิ้งทันที เจ็บสั้นดีกว่าปวดนาน ไม่ชอบถือลากข้ามวัน',                           type:'scalper'  },
+      { key:'B', text:'ปล่อยไหลตามแผน ถือต่อยาวๆ ไม่หวั่นไหวกับความผันผวนระยะสั้น',                   type:'position' },
+      { key:'C', text:'ไม่คิดอะไรเลย ยังทำตามแผนเดิม แล้วค่อยเช็กผลตอนเช้า',                          type:'ea'       },
+      { key:'D', text:'ไม่ตกใจ แต่ขอตั้งหลักก่อน ค่อยเช็กแนวรับสำคัญอีก 1-2 วัน',                    type:'swing'    },
+      { key:'E', text:'ยังไม่แน่ใจว่าควรทำอะไร อยากมีคนช่วยดูและวิเคราะห์ด้วยกัน',                     type:'guided'   },
     ]
   },
   {
     id: 2,
-    text: "ในวันที่สนามแห่งนี้ไม่มีสัญญาณหรือจังหวะให้เล่นเลย คุณจัดการตัวเองอย่างไร?",
+    text: 'วันที่ตลาดนิ่งสนิท ไม่มีสัญญาณให้เข้าเทรด คุณจัดการตัวเองอย่างไร?',
     options: [
-      { key: "A", text: "อึดอัดมาก อยากขยับมือทำอะไรสักอย่าง การอยู่เฉยๆ มันทำใจยาก", type: "scalper" },
-      { key: "B", text: "เฝ้ารอได้ แต่ขอเปิดจอบ่อยๆ เผื่อมีโอกาสหลุดมาให้คว้า", type: "swing" },
-      { key: "C", text: "ปิดจอ ไปพักผ่อนทำอย่างอื่น ตลาดนิ่งก็แค่พัก ไม่ใช่ปัญหา", type: "position" },
+      { key:'A', text:'ปิดจอ ไปพักผ่อน ตลาดไม่วิ่งก็แค่แยกย้าย ไม่ใช่ปัญหา',                         type:'position' },
+      { key:'B', text:'อึดอัดมาก นั่งไม่ติด คันมือ อยากกดออเดอร์สักหน่อย',                              type:'scalper'  },
+      { key:'C', text:'ชิลมาก ปล่อยบอทรันไป เอาเวลาไปใช้ชีวิตเต็มที่',                                type:'ea'       },
+      { key:'D', text:'เฝ้าหน้าจอต่อ เปิดดูบ่อยๆ เผื่อมีโอกาสสักจังหวะ',                              type:'swing'    },
+      { key:'E', text:'เข้าไปถามในกลุ่มหรือหาคนที่รู้มากกว่า ให้ช่วยดูว่าตลาดเป็นยังไง',               type:'guided'   },
     ]
   },
   {
     id: 3,
-    text: "เป้าหมายและปลายทางในการเข้ามาร่วมสนุกในสนามนี้ ข้อไหนตรงกับใจคุณที่สุด?",
+    text: 'เป้าหมายสูงสุดในการเข้ามาลุยตลาดการเงิน ข้อไหนตรงใจคุณที่สุด?',
     options: [
-      { key: "A", text: "เก็บผลตอบแทนเข้ากระเป๋าทุกวัน เม็ดเงินเล็กๆ แต่เห็นผลไวและสม่ำเสมอ", type: "scalper" },
-      { key: "B", text: "ดักกินรอบใหญ่เป็นสัปดาห์ ไม่จำเป็นต้องขยับตัวทุกวัน ขอเน้นๆ พอ", type: "swing" },
-      { key: "C", text: "เลือกพื้นที่ได้เปรียบในราคาที่ดี แล้วถือยาวปล่อยให้ระบบเติบโตตามแผน", type: "position" },
+      { key:'A', text:'สร้างฟาร์มระบบอัตโนมัติ ให้เครื่องจักรปั๊มเงินแทน 24 ชม. โดยไม่ต้องนั่งวิเคราะห์เอง', type:'ea' },
+      { key:'B', text:'เลือกจุดเข้าที่ได้เปรียบจาก TF ใหญ่ แล้วถือยาวรันเทรนด์ระดับสัปดาห์หรือเดือน', type:'position' },
+      { key:'C', text:'ดักกินคำโตเป็นรอบสัปดาห์ เล่นตามรอบสวิง ไม่ต้องเหนื่อยขยับทุกวัน',             type:'swing'    },
+      { key:'D', text:'เก็บกำไรทุกวัน เม็ดเงินไว เข้าออกเร็ว เห็นผลทันใจ',                             type:'scalper'  },
+      { key:'E', text:'อยากเทรดเป็นก่อน มีระบบของตัวเอง และมีคนคอยแนะนำระหว่างทาง',                    type:'guided'   },
     ]
   },
   {
     id: 4,
-    text: "ปัญหาหรืออุปสรรคชิ้นโตที่คุณมักจะพบเจออยู่บ่อยครั้งคืออะไร?",
+    text: 'ปัญหาที่พบบ่อยที่สุดในสนามนี้คืออะไร?',
     options: [
-      { key: "A", text: "เข้าช้า-ออกช้ากว่าจังหวะจริงไปก้าวหนึ่งเสมอ ลังเลจนพลาดตลอด", type: "scalper" },
-      { key: "B", text: "จังหวะบวกทำได้ดี แต่สุดท้ายชอบคืนคืนให้สนามหมด เพราะล็อคความเสี่ยงไม่เป็น", type: "swing" },
-      { key: "C", text: "มองแผนออก แต่พอถึงจุดสำคัญกลับไม่กล้าเพิ่มขนาดการลงทุนเพราะกลัวพลาด", type: "position" },
+      { key:'A', text:'ได้กำไรมาแล้วชอบคืนให้ตลาดหมด เพราะสัญญาณ TF ขัดแย้งกันแล้วแก้ไม่เป็น',        type:'swing'    },
+      { key:'B', text:'เลือกบอทไม่เป็น กลัวโดนหลอก หรือใช้แล้วระบบรันผิดพลาดพังพอร์ต',                 type:'ea'       },
+      { key:'C', text:'จังหวะช้ากว่าตลาดก้าวหนึ่งเสมอ ลังเลแค่นาทีเดียวกราฟก็วิ่งหนีแล้ว',             type:'scalper'  },
+      { key:'D', text:'มองแผนและเทรนด์ภาพใหญ่ออก แต่อ่านจังหวะเข้าไม่ขาด ลังเลจนไม่กล้าเปิดออเดอร์', type:'position' },
+      { key:'E', text:'ยังไม่รู้ว่าปัญหาจริงๆ ของตัวเองคืออะไร รู้แค่ว่าขาดทุนอยู่ และอยากแก้ให้ถูกจุด', type:'guided' },
     ]
   },
   {
     id: 5,
-    text: "หากผลลัพธ์ในสนามนี้ยังไม่เป็นไปตามเป้า คุณคิดว่าสาเหตุหลักมาจากจุดไหน?",
+    text: 'ถ้าพอร์ตยังไม่โตตามเป้า คิดว่าสาเหตุหลักมาจากไหน?',
     options: [
-      { key: "A", text: "การอ่านทิศทางระยะสั้นแบบ Real-time ยังไม่เฉียบขาดพอ", type: "scalper" },
-      { key: "B", text: "ยังขาดโครงสร้างและวินัยที่ชัดเจน มักเผลอใช้ความรู้สึกส่วนตัวตัดสินใจ", type: "swing" },
-      { key: "C", text: "ความรู้พื้นฐานและกลยุทธ์ภาพรวมยังไม่แน่นพอ ทำให้ไม่มั่นใจในแผนตัวเอง", type: "position" },
+      { key:'A', text:'ขาดความรู้ในวางระบบ EA เลือกให้เข้ากับพฤติกรรมตลาดจริง',               type:'ea'       },
+      { key:'B', text:'การอ่านทิศทางกราฟระยะสั้น Real-time และการสลับ TF เล็กยังไม่คมพอ',             type:'scalper'  },
+      { key:'C', text:'พื้นฐานเทคนิคอลและโครงสร้างเทรนด์ภาพใหญ่ยังไม่แน่น ทำให้ไม่มั่นใจในแผน',      type:'position' },
+      { key:'D', text:'ขาดวินัย ชอบใช้ความรู้สึกตัดสินใจ แทนการรอสัญญาณ Confirm จริงๆ',               type:'swing'    },
+      { key:'E', text:'ยังไม่มีระบบและคนคอยชี้แนะ เลยไม่รู้ว่าตัวเองผิดพลาดตรงไหน',                  type:'guided'   },
     ]
-  }
+  },
 ];
 
 const results = {
   scalper: {
-    emoji: "⚡",
-    name: "Scalper",
-    tagline: "ไว · เฉียบขาด · อยู่กับปัจจุบัน",
-    typeClass: "scalper",
-    desc: "คุณคือนักล่าที่มีความตื่นตัวสูงมาก ชอบความชัดเจนและเห็นผลลัพธ์ที่รวดเร็ว ตัดสินใจได้ในเสี้ยววินาที จุดเด่นของคุณคือความเด็ดขาดในการคุมความเสี่ยงระยะสั้น",
-    traits: ["#Real-time", "#ตัดสินใจไว", "#ไม่ถือข้ามวัน", "#คุมความเสี่ยงไว"],
-    weakness_title: "คำแนะนำจากพี่บีแบร์",
-    weakness: "สายนี้มักจะตกม้าตายตรง <strong>จังหวะจุดเข้าที่เร่งรีบเกินไป</strong> และเสี่ยงต่อการเสพติดการลุยจนเกินพอดี การมีโครงสร้างพื้นฐานที่ชัดเจนจะช่วยกรองสิ่งรบกวนรอบตัว และทำให้อยู่รอดได้ยาวๆ ครับ",
-    cta_headline: "อยากเข้าทำจังหวะได้คมและปลอดภัยขึ้นไหม?",
-    cta_sub: "พี่เตรียมพื้นที่เรียนรู้ฟรี ปูพื้นฐานการอ่านโครงสร้างสนามและจังหวะเข้าทำไว้ให้แล้วครับ",
-    primary_label: "🎓 แวะมาศึกษาด้วยกันฟรี",
-    secondary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
-    primary_first: true
+    emoji: '⚡', name: 'Scalper', tagline: 'ไว · เฉียบขาด · อยู่กับปัจจุบัน',
+    desc: 'คุณคือนักล่าที่มีความตื่นตัวสูงมาก ชอบความชัดเจนและเห็นผลลัพธ์ที่รวดเร็ว ตัดสินใจได้ในเสี้ยววินาที จุดเด่นของคุณคือความเด็ดขาดในการคุมความเสี่ยงระยะสั้น',
+    traits: ['#Real-time','#ตัดสินใจไว','#ไม่ถือข้ามวัน','#คุมความเสี่ยงไว'],
+    weakness: 'สายนี้มักตกม้าตายตรง <strong>จังหวะเข้าที่เร่งรีบเกินไป</strong> และเสี่ยงเสพติดการลุยจนเกินพอดี การมี Framework ที่ชัดเจนอย่าง Triple S จะช่วยกรองสิ่งรบกวนและทำให้อยู่รอดได้ยาวๆ ครับ',
+    cta_headline: 'อยากจับจังหวะได้คมและปลอดภัยขึ้นไหม?',
+    cta_sub: 'พี่สรุป Checklist 7 ด่านที่ Scalper ต้องผ่านก่อนกดออเดอร์ทุกครั้ง ไว้ให้ฟรีแล้วครับ',
+    buttons: [
+      { label:'📋 รับ Triple S Trading Checklist ฟรี', href: LINKS.checklist, cls:'btn-gold' },
+      { label:'📘 ดูคอร์ส Triple S Foundation',        href: LINKS.salepage,  cls:'btn-outline' },
+      { label:'🌲 เข้าบ้าน Discord ฟรีเลย',            href: LINKS.discord,   cls:'btn-discord' },
+    ]
   },
   swing: {
-    emoji: "🌊",
-    name: "Swing Trader",
-    tagline: "ดักรอบใหญ่ · ใจเย็น · ไม่รีบร้อน",
-    typeClass: "swing",
-    desc: "คุณเป็นคนมองเกมกว้าง รู้จักจังหวะที่ควรลุยและควรรอ ไม่ปล่อยให้ความผันผวนระยะสั้นมาปั่นหัว จุดเด่นคือความอดทนและการอ่านโครงสร้างใหญ่ได้อย่างเป็นระบบ",
-    traits: ["#จับจังหวะรอบใหญ่", "#อ่านโครงสร้างแม่น", "#รอสัญญาณจริง", "#สมดุลชีวิตดี"],
-    weakness_title: "คำแนะนำจากพี่บีแบร์",
-    weakness: "ปัญหาของสายรอบใหญ่คือ <strong>ได้ผลตอบแทนมาแล้วปล่อยให้ไหลกลับไปที่เดิม</strong> เพราะขาดระบบการล็อคสิทธิ์ที่เป็นรูปธรรม หรือบางครั้งลังเลจนปล่อยโอกาสหลุดมือไปอย่างน่าเสียดาย",
-    cta_headline: "อยากสร้างระบบล็อคความยั่งยืนไหม?",
-    cta_sub: "มารับวิธีบริหารหน้าตักและอ่านโครงสร้างเชิงลึกในระบบบริการฟรีที่พี่ตั้งใจทำไว้ให้ได้เลย",
-    primary_label: "🎓 แวะมาศึกษาด้วยกันฟรี",
-    secondary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
-    primary_first: true
+    emoji: '🌊', name: 'Swing Trader', tagline: 'ดักรอบใหญ่ · ใจเย็น · ไม่รีบร้อน',
+    desc: 'คุณเป็นคนมองเกมกว้าง รู้จักจังหวะที่ควรลุยและควรรอ ไม่ปล่อยให้ความผันผวนระยะสั้นมาปั่นหัว จุดเด่นคือความอดทนและการอ่านโครงสร้างใหญ่ได้อย่างเป็นระบบ',
+    traits: ['#จับรอบใหญ่','#อ่านโครงสร้างแม่น','#รอสัญญาณจริง','#สมดุลชีวิตดี'],
+    weakness: 'ปัญหาของสายรอบใหญ่คือ <strong>ได้กำไรมาแล้วปล่อยให้ไหลกลับไปที่เดิม</strong> เพราะขาดระบบ Risk Management ที่เป็นรูปธรรม Excel คำนวณ Lot Size จะช่วยล็อคความเสี่ยงของคุณได้ครับ',
+    cta_headline: 'อยากสร้างระบบล็อคกำไรให้ยั่งยืนไหม?',
+    cta_sub: 'พี่เตรียม Checklist + Excel คำนวณ Lot Size ไว้ให้ฟรี ใช้คู่กันแล้วจะรู้สึกต่างทันทีครับ',
+    buttons: [
+      { label:'📊 รับ Triple S Lot Size Calculator ฟรี', href: LINKS.excel,    cls:'btn-gold' },
+      { label:'📘 ดูคอร์ส Triple S Foundation',          href: LINKS.salepage,  cls:'btn-outline' },
+      { label:'🌲 เข้าบ้าน Discord ฟรีเลย',              href: LINKS.discord,   cls:'btn-discord' },
+    ]
   },
   position: {
-    emoji: "🏔️",
-    name: "Position Trader",
-    tagline: "มองภาพกว้าง · วินัยเหล็ก · เดินเกมระยะยาว",
-    typeClass: "position",
-    desc: "คุณมีความคิดเหมือนผู้จัดการกองทุน โฟกัสภาพรวมระดับมหภาคมากกว่าตัวเลขรายวัน มีวินัยสูงมาก และมักจะมองเห็นโอกาสครั้งใหญ่ในจุดที่คนอื่นตื่นตระหนกกันไปหมด",
-    traits: ["#มองภาพใหญ่", "#เดินเกมระยะยาว", "#วินัยเหล็ก", "#เข้าใจกลไกโลก"],
-    weakness_title: "คำแนะนำจากพี่บีแบร์",
-    weakness: "จุดเปราะบางคือ <strong>ถ้าพื้นฐานแนวคิดไม่แน่นพอ คุณจะลังเลตลอดทาง</strong> ทำให้พลาดการเก็บของดีราคาถูก หรือแก้เกมผิดจุดเมื่อสนามเปลี่ยนทิศทางในระยะยาว",
-    cta_headline: "อยากเติมฐานรากแนวคิดให้แน่นหนากว่าเดิมไหม?",
-    cta_sub: "พี่รวบรวมแผนที่เดินเกมและโครงสร้างจิตวิทยาเชิงลึกไว้ในคอร์สพื้นที่ปลอดภัย ราคาชานมเรียบร้อยครับ",
-    primary_label: "📘 ดูระบบพื้นที่ปลอดภัย (Full Course)",
-    secondary_label: "🎓 แวะมาศึกษาด้วยกันฟรีก่อน",
-    primary_first: false
-  }
+    emoji: '🏔️', name: 'Position Trader', tagline: 'มองภาพกว้าง · วินัยเหล็ก · ระยะยาว',
+    desc: 'คุณมีความคิดเหมือนผู้จัดการกองทุน โฟกัสภาพรวมระดับมหภาคมากกว่าตัวเลขรายวัน มีวินัยสูง และมักมองเห็นโอกาสครั้งใหญ่ในจุดที่คนอื่นตื่นตระหนกกันไปหมด',
+    traits: ['#มองภาพใหญ่','#เดินเกมระยะยาว','#วินัยเหล็ก','#เข้าใจกลไกโลก'],
+    weakness: 'จุดเปราะบางคือ <strong>ถ้า Framework ไม่แน่นพอ คุณจะลังเลตลอดทาง</strong> ทำให้พลาดการเก็บของดีราคาถูก หรือแก้เกมผิดจุดเมื่อสนามเปลี่ยนทิศในระยะยาว',
+    cta_headline: 'อยากเติมพื้นฐานให้แน่นก่อนลุยรอบใหญ่ไหม?',
+    cta_sub: 'คอร์ส Triple S Foundation สร้างมาเพื่อสายนี้โดยเฉพาะ เรียนจบแล้วจะมั่นใจในแผนตัวเองมากขึ้นทันทีครับ',
+    buttons: [
+      { label:'📘 ดูคอร์ส Triple S Foundation',        href: LINKS.salepage, cls:'btn-gold' },
+      { label:'📋 รับ Triple S Trading Checklist ฟรี', href: LINKS.checklist, cls:'btn-outline' },
+      { label:'🌲 เข้าบ้าน Discord ฟรีเลย',            href: LINKS.discord,  cls:'btn-discord' },
+    ]
+  },
+  ea: {
+    emoji: '🤖', name: 'EA Farmer', tagline: 'ระบบทำงาน · คุณเป็นเจ้าของฟาร์ม',
+    desc: 'คุณมองการเทรดแบบนักธุรกิจจริงๆ ไม่อยากเสียเวลานั่งเฝ้าจอ อยากให้ระบบที่ดีทำงานแทน แล้วคุณแค่ดูแลภาพรวมและ Scale ขึ้นเรื่อยๆ',
+    traits: ['#ระบบอัตโนมัติ','#ไม่เฝ้าจอ','#Scale ได้ไม่จำกัด','#ธุรกิจเทรด'],
+    weakness: '<strong>EA เก่งแค่ไหนก็ต้องการคนที่เข้าใจตลาดคอยดูแล</strong> ถ้าไม่มีพื้นฐาน Triple S คุณจะไม่รู้ว่าถึงเวลาหยุด EA แล้วหรือยัง และเลือก EA ที่ดีจริงไม่เป็น',
+    cta_headline: 'อยากรู้ว่า EA ไหนดีจริง และเลือกอย่างไรไม่ให้โดนหลอก?',
+    cta_sub: 'พื้นฐาน Triple S จะทำให้คุณเป็นเจ้าของฟาร์มที่แท้จริง ไม่ใช่แค่คนเปิด EA แล้วหวังว่ามันจะรอดเองครับ',
+    // Fix #3 — เพิ่มปุ่ม Checklist ให้ EA Farmer
+    buttons: [
+      { label:'📘 ดูคอร์ส Triple S Foundation',        href: LINKS.salepage,  cls:'btn-gold' },
+      { label:'📋 รับ Checklist ก่อนใช้ EA',            href: LINKS.checklist, cls:'btn-outline' },
+      { label:'🌲 เข้าบ้าน Discord ฟรีเลย',            href: LINKS.discord,   cls:'btn-discord' },
+    ]
+  },
+  guided: {
+    emoji: '🐻', name: 'Guided Trader', tagline: 'เรียนรู้ไปด้วยกัน · มีระบบ · ไม่ลุยคนเดียว',
+    desc: 'คุณไม่ได้ขาดความสามารถ คุณแค่ยังไม่มีระบบและเพื่อนร่วมทาง คนที่เทรดรอดในระยะยาวส่วนใหญ่ไม่ได้เก่งคนเดียว แต่เลือกอยู่ในสภาพแวดล้อมที่ถูกต้อง',
+    traits: ['#มือใหม่ไฟแรง','#เปิดรับเรียนรู้','#ชอบมี Community','#โตได้เร็วที่สุด'],
+    weakness: 'ยังไม่มีนิสัยผิดๆ ที่ต้องแก้ นี่คือจุดแข็งที่ใหญ่มากครับ <strong>ถ้าเริ่มต้นในสภาพแวดล้อมที่ถูกต้องตั้งแต่แรก</strong> คุณจะพัฒนาได้เร็วกว่าคนที่ต้องมาแก้นิสัยเดิมทีหลัง',
+    cta_headline: 'คุณไม่ได้ขาดความสามารถ\nคุณแค่ยังไม่มีระบบและเพื่อนร่วมทาง',
+    cta_sub: 'Triple S Community คือจุดเริ่มต้นที่ใช่สำหรับคุณ เข้ามาฟรี ไม่มีขาย มีแต่คนอยากเทรดให้รอดเหมือนกันครับ',
+    buttons: [
+      { label:'🌲 เข้าบ้าน Triple S Discord ฟรีเลย', href: LINKS.discord,   cls:'btn-discord' },
+      { label:'📋 รับ Checklist ฟรีก่อน',             href: LINKS.checklist, cls:'btn-outline' },
+      { label:'📘 ดูคอร์ส Triple S Foundation',        href: LINKS.salepage,  cls:'btn-outline' },
+    ]
+  },
 };
 
-const URL_MINI_COURSE = "https://example.com/mini-course"; // ใส่ลิงก์ LINE OA / Mini Course ตรงนี้
-const URL_COURSE_1290 = "https://example.com/course-1290"; // ใส่ลิงก์หน้าขายคอร์สตรงนี้
-
-let current = 0;
-let answers = [];
+let current = 0, answers = [];
 
 function renderQuestion() {
   const q = questions[current];
   const pct = (current / questions.length) * 100;
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-num').textContent = `${current} / ${questions.length}`;
-
   document.getElementById('question-area').innerHTML = `
     <div class="question-card">
       <div class="q-number">STAGE ${String(q.id).padStart(2,'0')}</div>
@@ -582,7 +322,8 @@ function renderQuestion() {
     </div>
     <div class="options">
       ${q.options.map((o,i) => `
-        <button class="option-btn" onclick="selectOption(this,'${o.type}')" style="animation: slideUp 0.3s ${i*0.05}s ease both">
+        <button class="option-btn" onclick="selectOption(this,'${o.type}')"
+          style="animation: slideUp 0.3s ${i*0.06}s ease both; opacity:0;">
           <span class="opt-key">${o.key}</span>
           <span class="opt-text">${o.text}</span>
         </button>
@@ -602,34 +343,57 @@ function selectOption(el, type) {
 function nextQuestion() {
   if (!answers[current]) return;
   current++;
-  if (current < questions.length) {
-    renderQuestion();
-  } else {
-    showResult();
-  }
+  if (current < questions.length) renderQuestion();
+  else showResult();
 }
 
 function showResult() {
-  const count = { scalper: 0, swing: 0, position: 0 };
+  const count = { scalper:0, swing:0, position:0, ea:0, guided:0 };
   answers.forEach(a => count[a]++);
-  const winner = Object.entries(count).sort((a,b) => b[1]-a[1])[0][0];
+  const sorted = Object.entries(count).sort((a,b) => b[1]-a[1]);
+  const winner = sorted[0][0];
   const r = results[winner];
+  const total = questions.length;
 
-  const primaryHref  = r.primary_first ? URL_MINI_COURSE : URL_COURSE_1290;
-  const secondaryHref = r.primary_first ? URL_COURSE_1290 : URL_MINI_COURSE;
-
-  document.getElementById('quiz-section').classList.add('hidden');
   document.getElementById('progress-fill').style.width = '100%';
   document.getElementById('progress-num').textContent = '5 / 5';
+  document.getElementById('quiz-section').classList.add('hidden');
+
+  // Fix #4 — Score breakdown
+  const scoreRows = sorted.map(([type, val]) => {
+    const pct = Math.round((val / total) * 100);
+    const isWinner = type === winner;
+    return `
+      <div class="score-row">
+        <span class="score-label">${TYPE_LABELS[type]}</span>
+        <div class="score-bar-wrap">
+          <div class="score-bar-fill ${isWinner ? 'winner' : ''}" style="width:${pct}%"></div>
+        </div>
+        <span class="score-val">${val}/${total}</span>
+      </div>
+    `;
+  }).join('');
+
+  const btns = r.buttons.map(b =>
+    `<a class="${b.cls}" href="${b.href}" target="_blank">${b.label}</a>`
+  ).join('');
+
+  // Fix #2 — LINE เป็น CTA รองขนาดเล็ก ไม่โผล่แข่งกับปุ่มหลัก
+  const lineBtn = `<a class="btn-line-secondary" href="${LINKS.line}" target="_blank">💬 สอบถามเพิ่มเติมผ่าน LINE OA</a>`;
 
   const sec = document.getElementById('result-section');
   sec.classList.add('visible');
   sec.innerHTML = `
     <div class="result-crown">
-      <div class="result-label">สไตล์การเล่นของคุณคือ</div>
+      <div class="result-label">สไตล์การเทรดของคุณคือ</div>
       <span class="result-emoji">${r.emoji}</span>
       <div class="result-type-name">${r.name}</div>
       <div class="result-tagline">"${r.tagline}"</div>
+    </div>
+
+    <div class="score-card">
+      <div class="score-title">Score Breakdown</div>
+      ${scoreRows}
     </div>
 
     <div class="result-desc-card">
@@ -640,29 +404,71 @@ function showResult() {
     </div>
 
     <div class="weakness-card">
-      <div class="weakness-label">${r.weakness_title}</div>
+      <div class="weakness-label">คำแนะนำจากพี่บีแบร์</div>
       <div class="weakness-text">${r.weakness}</div>
     </div>
 
     <div class="cta-card">
-      <div class="cta-headline">${r.cta_headline}</div>
+      <div class="cta-headline">${r.cta_headline.replace(/\n/g,'<br>')}</div>
       <div class="cta-sub">${r.cta_sub}</div>
       <div class="cta-buttons">
-        <a class="btn-primary" href="${primaryHref}" target="_blank">${r.primary_label}</a>
-        <a class="btn-secondary" href="${secondaryHref}" target="_blank">${r.secondary_label}</a>
+        ${btns}
+        ${lineBtn}
       </div>
     </div>
 
+
+    <div class="social-follow">
+      <div class="social-follow-label">ติดตามพี่บีแบร์</div>
+      <div class="social-links">
+        <a class="social-link" href="https://www.facebook.com/TripleS.Academyfx" target="_blank">
+          <div class="social-icon fb">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </div>
+          <div class="social-info">
+            <div class="social-platform">Facebook</div>
+            <div class="social-name">บีแบร์ สอนเทรด</div>
+          </div>
+        </a>
+        <a class="social-link" href="https://www.youtube.com/@Bbear_TripleS" target="_blank">
+          <div class="social-icon yt">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="social-info">
+            <div class="social-platform">YouTube</div>
+            <div class="social-name">บีแบร์ สอนเทรด</div>
+          </div>
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@beebear.triple.s" target="_blank">
+          <div class="social-icon tt">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </div>
+          <div class="social-info">
+            <div class="social-platform">TikTok</div>
+            <div class="social-name">บีแบร์ สอนเทรด</div>
+          </div>
+        </a>
+      </div>
+    </div>
     <div class="bottom-row">
       <button class="btn-share" onclick="copyResult('${winner}')">📋 คัดลอกผลลัพธ์</button>
       <button class="btn-retry" onclick="resetQuiz()">↩ ทำใหม่อีกครั้ง</button>
     </div>
   `;
+
+  // Animate score bars after render
+  setTimeout(() => {
+    document.querySelectorAll('.score-bar-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      setTimeout(() => el.style.width = w, 50);
+    });
+  }, 100);
 }
 
 function copyResult(type) {
   const r = results[type];
-  const text = `🎯 ผลลัพธ์ของฉันคือสาย: ${r.emoji} ${r.name}\nนิสัย: "${r.tagline}"\nมาร่วมเป็นส่วนหนึ่งในคอมมูนิตี้ที่ปลอดภัย Triple S ด้วยกันได้เลยครับ!`;
+  const text = `🎯 สไตล์การเทรดของฉันคือ: ${r.emoji} ${r.name}\n"${r.tagline}"\n\nค้นหาสไตล์ของคุณได้ที่ Triple S Community ครับ!`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.querySelector('.btn-share');
     btn.textContent = '✦ คัดลอกเรียบร้อย!';
